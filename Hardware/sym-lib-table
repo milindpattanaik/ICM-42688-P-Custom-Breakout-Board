@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "icm-42688-p")(type "KiCad")(uri "${KIPRJMOD}/symbols/icm-42688-p.kicad_sym")(options "")(descr ""))
+  (lib (name "ld39200pu33r")(type "KiCad")(uri "${KIPRJMOD}/symbols/ld39200pu33r.kicad_sym")(options "")(descr ""))
+)

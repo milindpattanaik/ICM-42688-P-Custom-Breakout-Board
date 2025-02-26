@@ -1,0 +1,5 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "IIM42352")(type "KiCad")(uri "${KIPRJMOD}/footprints/IIM42352.kicad_mod")(options "")(descr ""))
+  (lib (name "SON95P300X300X100-7N-D")(type "KiCad")(uri "${KIPRJMOD}/footprints/SON95P300X300X100-7N-D.kicad_mod")(options "")(descr ""))
+)

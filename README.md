@@ -29,3 +29,51 @@ The driver used for interfacing with the **ICM-42688-P** is an open-source imple
 
 ### PCB Layout
 ![ICM-42688-P PCB](/Hardware/ICM-42688-P-3d-Pic.PNG)
+
+## Software
+
+### Fixing `<cstdint>` Issues with AVR-GCC  
+
+When compiling for AVR-based boards (e.g., **Arduino Uno, Mega, etc.**) using **AVR-GCC**, you may encounter the following error:  
+
+```sh
+fatal error: cstdint: No such file or directory
+```
+
+This happens because **AVR-GCC does not fully support C++ standard headers like `<cstdint>`**. This issue is common when using **PlatformIO** or **VS Code with IntelliSense**.  
+
+
+### Solution: Use `<stdint.h>` Instead  
+The best solution is to replace `<cstdint>` with `<stdint.h>` in the `registers.h` file of the driver src code.  
+
+❌ **Incorrect:**  
+```cpp
+#include <cstdint>  // This may cause issues with AVR-GCC
+```
+✅ **Correct:**  
+```cpp
+#ifdef AVR  // If compiling for AVR, define NO_CSTDINT to prevent including <cstdint>
+# define NO_CSTDINT 1
+#endif
+
+// If NO_CSTDINT is NOT defined, include the standard C++ <cstdint>
+#ifndef NO_CSTDINT
+# include <cstdint>
+#else
+# include <stdint.h>
+
+// If <cstdint> is unavailable, manually provide the needed types.
+namespace std {
+  using ::int8_t;           
+  using ::uint8_t;         
+                     
+  using ::int16_t;         
+  using ::uint16_t;       
+                     
+  using ::int32_t;         
+  using ::uint32_t;       
+}
+
+#endif
+```
+✅ `<stdint.h>` is the **C version of `<cstdint>`** and is fully compatible with AVR-GCC.

@@ -40,8 +40,7 @@ When compiling for AVR-based boards (e.g., **Arduino Uno, Mega, etc.**) using **
 fatal error: cstdint: No such file or directory
 ```
 
-This happens because **AVR-GCC does not fully support C++ standard headers like `<cstdint>`**. This issue is common when using **PlatformIO** or **VS Code with IntelliSense**.  
-
+This happens because **AVR-GCC does not fully support C++ standard headers like `<cstdint>`**. This is a common defect in the arduino library.  
 
 ### Solution: Use `<stdint.h>` Instead  
 The best solution is to replace `<cstdint>` with `<stdint.h>` in the `registers.h` file of the driver src code.  
